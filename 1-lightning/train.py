@@ -74,9 +74,9 @@ def objective(trial):
 
     trainer = pl.Trainer(
         logger=mlflow_logger,
-        max_epochs=3,
+        max_epochs=10,
         accelerator="cpu",
-        callbacks=[EarlyStopping(monitor="val_loss", patience=2)],
+        callbacks=[EarlyStopping(monitor="val_loss", patience=3)],
         enable_progress_bar=False,
     )
 
