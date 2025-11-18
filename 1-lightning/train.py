@@ -25,7 +25,7 @@ class LitClassifier(pl.LightningModule):
         return self.model(x)
 
     def configure_optimizers(self):
-        return torch.optim.Adam(self.parameters(), lr=self.hparams.lr)
+        return torch.optim.AdamW(self.parameters(), lr=self.hparams.lr)
 
     def training_step(self, batch, batch_idx):
         x, y = batch
