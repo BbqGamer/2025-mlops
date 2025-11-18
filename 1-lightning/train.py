@@ -90,6 +90,7 @@ def objective(trial):
 
 
 if __name__ == "__main__":
+    pl.seed_everything(42)
     study = optuna.create_study(direction="minimize")
     study.optimize(objective, n_trials=20)
 
