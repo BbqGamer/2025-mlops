@@ -39,6 +39,7 @@ class LitClassifier(pl.LightningModule):
         self.log("val_acc", acc, prog_bar=True)
         return loss
 ```
+More code can be found in [train.py](train.py)
 
 ## Main problems encountered (for others to learn from your mistakes)
 At first i started with more difficult problem (CIFAR-100) and a more complex model (CNN with multiple layers). However, training was very slow on CPU and I couldn't complete enough trials for hyper-parameter optimization. Therefore, I switched to MNIST and a simple feedforward network to ensure that I could run multiple trials in a reasonable time frame.
