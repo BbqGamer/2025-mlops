@@ -47,8 +47,8 @@ class LitClassifier(pl.LightningModule):
 def get_dataloaders(batch_size=64):
     transform = transforms.ToTensor()
 
-    train = datasets.MNIST(".", download=True, train=True, transform=transform)
-    val = datasets.MNIST(".", download=True, train=False, transform=transform)
+    train = datasets.MNIST("./data", download=True, train=True, transform=transform)
+    val = datasets.MNIST("./data", download=True, train=False, transform=transform)
 
     train_loader = DataLoader(train, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val, batch_size=batch_size)
@@ -56,7 +56,7 @@ def get_dataloaders(batch_size=64):
 
 
 def objective(trial):
-    lr = trial.suggest_loguniform("lr", 1e-4, 1e-1)
+    lr = trial.suggest_float("lr", 1e-4, 1e-1)
     hidden_dim = trial.suggest_int("hidden_dim", 32, 512)
     batch_size = trial.suggest_categorical("batch_size", [32, 64, 128])
 
