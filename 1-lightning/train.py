@@ -58,14 +58,14 @@ def get_dataloaders(batch_size=64):
 def objective(trial):
     lr = trial.suggest_float("lr", 1e-4, 1e-1)
     hidden_dim = trial.suggest_int("hidden_dim", 32, 512)
-    batch_size = trial.suggest_categorical("batch_size", [32, 64, 128])
+    batch_size = trial.suggest_categorical("batch_size", [32, 64, 128, 256])
 
     train_loader, val_loader = get_dataloaders(batch_size)
 
     model = LitClassifier(lr=lr, hidden_dim=hidden_dim)
 
     mlflow_logger = MLFlowLogger(
-        experiment_name="mnist_optuna_lightning", run_name=f"trial_{trial.number}"
+        experiment_name="mnist_optuna_lightning1", run_name=f"trial_{trial.number}"
     )
 
     mlflow_logger.log_hyperparams(
@@ -91,6 +91,6 @@ def objective(trial):
 
 if __name__ == "__main__":
     study = optuna.create_study(direction="minimize")
-    study.optimize(objective, n_trials=10)
+    study.optimize(objective, n_trials=20)
 
     print("Best trial:", study.best_trial.params)
