@@ -1,3 +1,4 @@
+import mlflow.pytorch
 import optuna
 import pytorch_lightning as pl
 import torch
@@ -100,6 +101,12 @@ def objective(trial):
     val_loss = trainer.callback_metrics["val_loss"].item()
 
     mlflow_logger.log_metrics({"final_val_loss": val_loss})
+
+    mlflow.pytorch.log_model(
+        model,
+        "model",
+        registered_model_name=None,
+    )
 
     return val_loss
 
