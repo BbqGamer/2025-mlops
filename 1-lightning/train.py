@@ -65,7 +65,9 @@ def objective(trial):
     model = LitClassifier(lr=lr, hidden_dim=hidden_dim)
 
     mlflow_logger = MLFlowLogger(
-        experiment_name="mnist_optuna_lightning1", run_name=f"trial_{trial.number}"
+        experiment_name="mnist_optuna_lightning1",
+        run_name=f"trial_{trial.number}",
+        tracking_uri="sqlite:///mlflow_artifacts/mlruns.db",
     )
 
     mlflow_logger.log_hyperparams(
