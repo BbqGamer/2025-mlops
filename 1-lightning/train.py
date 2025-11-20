@@ -79,6 +79,7 @@ def objective(trial):
         experiment_name="mnist_optuna_lightning1",
         run_name=f"trial_{trial.number}",
         tracking_uri="sqlite:///mlflow_artifacts/mlruns.db",
+        save_dir="./mlflow_artifacts",
     )
 
     mlflow_logger.log_hyperparams(
@@ -91,6 +92,7 @@ def objective(trial):
         accelerator="cpu",
         callbacks=[EarlyStopping(monitor="val_loss", patience=3)],
         enable_progress_bar=False,
+        enable_checkpointing=False,
     )
 
     trainer.fit(model, train_loader, val_loader)
