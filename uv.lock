@@ -3,33 +3,6 @@ revision = 3
 requires-python = ">=3.13"
 
 [[package]]
-name = "1-lightning"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "matplotlib" },
-    { name = "mlflow" },
-    { name = "optuna" },
-    { name = "pillow" },
-    { name = "pytorch-lightning" },
-    { name = "seaborn" },
-    { name = "torch" },
-    { name = "torchvision" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "matplotlib", specifier = ">=3.10.7" },
-    { name = "mlflow", specifier = ">=3.6.0" },
-    { name = "optuna", specifier = ">=4.6.0" },
-    { name = "pillow", specifier = ">=12.0.0" },
-    { name = "pytorch-lightning", specifier = ">=2.5.6" },
-    { name = "seaborn", specifier = ">=0.13.2" },
-    { name = "torch", specifier = ">=2.9.1" },
-    { name = "torchvision", specifier = ">=0.24.1" },
-]
-
-[[package]]
 name = "aiohappyeyeballs"
 version = "2.6.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1092,6 +1065,33 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/11/4e/a1b2f977a50ed3860e2848548a9173b9018806628d46d5bdafa8b45bc0c7/mlflow_tracing-3.6.0.tar.gz", hash = "sha256:ccff80b3aad6caa18233c98ba69922a91a6f914e0a13d12e1977af7523523d4c", size = 1061879, upload-time = "2025-11-07T18:36:24.818Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/5e/ec/ba3f513152cf5404e36263604d484728d47e61678c39228c36eb769199af/mlflow_tracing-3.6.0-py3-none-any.whl", hash = "sha256:a68ff03ba5129c67dc98e6871e0d5ef512dd3ee66d01e1c1a0c946c08a6d4755", size = 1281617, upload-time = "2025-11-07T18:36:23.299Z" },
+]
+
+[[package]]
+name = "mlops"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "matplotlib" },
+    { name = "mlflow" },
+    { name = "optuna" },
+    { name = "pillow" },
+    { name = "pytorch-lightning" },
+    { name = "seaborn" },
+    { name = "torch" },
+    { name = "torchvision" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "matplotlib", specifier = ">=3.10.7" },
+    { name = "mlflow", specifier = ">=3.6.0" },
+    { name = "optuna", specifier = ">=4.6.0" },
+    { name = "pillow", specifier = ">=12.0.0" },
+    { name = "pytorch-lightning", specifier = ">=2.5.6" },
+    { name = "seaborn", specifier = ">=0.13.2" },
+    { name = "torch", specifier = ">=2.9.1" },
+    { name = "torchvision", specifier = ">=0.24.1" },
 ]
 
 [[package]]

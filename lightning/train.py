@@ -1,4 +1,3 @@
-import mlflow.pytorch
 import optuna
 import pytorch_lightning as pl
 import torch
@@ -77,10 +76,9 @@ def objective(trial):
     model = LitClassifier(lr=lr, hidden_dim=hidden_dim)
 
     mlflow_logger = MLFlowLogger(
-        experiment_name="mnist_optuna_lightning1",
+        experiment_name="mnist_optuna_lightning",
         run_name=f"trial_{trial.number}",
-        tracking_uri="sqlite:///mlflow_artifacts/mlruns.db",
-        save_dir="./mlflow_artifacts",
+        log_model="all",
     )
 
     mlflow_logger.log_hyperparams(
@@ -92,21 +90,14 @@ def objective(trial):
         max_epochs=10,
         accelerator="cpu",
         callbacks=[EarlyStopping(monitor="val_loss", patience=3)],
-        enable_progress_bar=False,
-        enable_checkpointing=False,
+        enable_progress_bar=True,
+        enable_checkpointing=True,
     )
 
     trainer.fit(model, train_loader, val_loader)
 
     val_loss = trainer.callback_metrics["val_loss"].item()
-
     mlflow_logger.log_metrics({"final_val_loss": val_loss})
-
-    mlflow.pytorch.log_model(
-        model,
-        "model",
-        registered_model_name=None,
-    )
 
     return val_loss
 

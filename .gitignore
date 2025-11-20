@@ -2,3 +2,6 @@
 data/
 mlflow_artifacts/
 mlruns/
+__pycache__/
+mlruns.db
+1/
