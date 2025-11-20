@@ -4,7 +4,7 @@ import torch
 from pytorch_lightning.callbacks import EarlyStopping
 from pytorch_lightning.loggers import MLFlowLogger
 from torch import nn
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, random_split
 from torchvision import datasets, transforms
 
 
@@ -44,14 +44,25 @@ class LitClassifier(pl.LightningModule):
         return loss
 
 
-def get_dataloaders(batch_size=64):
+def get_dataloaders(batch_size=64, val_split=0.1667):
     transform = transforms.ToTensor()
 
-    train = datasets.MNIST("./data", download=True, train=True, transform=transform)
-    val = datasets.MNIST("./data", download=True, train=False, transform=transform)
+    # Load full training set
+    full_train = datasets.MNIST(
+        "./data", download=True, train=True, transform=transform
+    )
 
-    train_loader = DataLoader(train, batch_size=batch_size, shuffle=True)
-    val_loader = DataLoader(val, batch_size=batch_size)
+    # Split into train and val
+    val_size = int(len(full_train) * val_split)
+    train_size = len(full_train) - val_size
+    train_dataset, val_dataset = random_split(
+        full_train, [train_size, val_size], generator=torch.Generator().manual_seed(42)
+    )
+
+    train_loader = DataLoader(
+        train_dataset, batch_size=batch_size, shuffle=True, num_workers=0
+    )
+    val_loader = DataLoader(val_dataset, batch_size=batch_size, num_workers=0)
     return train_loader, val_loader
 
 
