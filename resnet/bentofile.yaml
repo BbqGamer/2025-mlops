@@ -1,0 +1,11 @@
+service: "service:ResNetService"
+labels:
+  owner: student
+include:
+  - "*.py"
+python:
+  packages:
+    - torch
+    - torchvision
+    - transformers
+    - Pillow
